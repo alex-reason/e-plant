@@ -1,8 +1,11 @@
-import React from 'react'
+import Header from '../components/Header';
 
 const Categories = () => {
   return (
-    <div>categories</div>
+    <div>
+      <Header />
+      Categories
+    </div>
   )
 }
 
