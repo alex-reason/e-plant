@@ -10,6 +10,7 @@ const StyledButton = styled.button`
     border: ${props => props.$primary ? "none" : "1px solid #f1f1f1"};
     display: inline-flex;
     align-items: center;
+    transition: all;
 
     svg {
         width: 15px;

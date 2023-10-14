@@ -1,5 +1,8 @@
 "use client"
+import { useRouter } from 'next/navigation';
 import styled from "styled-components";
+import { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 import CenterContainer from "./CenterContainer";
 import PrimaryBtn from "./PrimaryBtn";
 
@@ -41,19 +44,28 @@ const ButtonContainer = styled.div`
     gap: .3rem;
 `;
 
-const Featured = () => {
+
+const Featured = ({ prodInfo }) => {
+    const { setCartProducts } = useContext(CartContext);
+    const handleAddToCart = () => {
+        setCartProducts(prev => [...prev, prodInfo.title])
+    };
+
+    
+
+    const router = useRouter();
     return (
         <StyledContainer>
             <CenterContainer>
                 <Wrapper>
                     <div>
-                        <Title>Featured: Variegated Rubber Plant</Title>
+                        <Title>Featured: {prodInfo.title}</Title>
                         <Descr>
-                            A rare variegated version of the rubber plant. This low maintenance plant is easy to take care of, and the splash of color will elavate any corner of the room!
+                            One of our current favorite plants. {prodInfo.description}
                         </Descr>
                         <ButtonContainer>
-                            <PrimaryBtn>See More</PrimaryBtn>
-                            <PrimaryBtn $primary>
+                            <PrimaryBtn onClick={() => router.push('/categories')}>See More</PrimaryBtn>
+                            <PrimaryBtn $primary onClick={handleAddToCart}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-1 h-1">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                                 </svg>
@@ -62,7 +74,7 @@ const Featured = () => {
                         </ButtonContainer>
                     </div>
                     <div>
-                        <img alt='house plants' src='https://source.unsplash.com/0geACriyga8' />
+                        <img alt={prodInfo.title} src={prodInfo.imageList[0]} />
                     </div>
                 </Wrapper>
 
